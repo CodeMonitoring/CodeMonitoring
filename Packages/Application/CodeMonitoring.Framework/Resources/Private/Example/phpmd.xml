@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pmd version="@project.version@" timestamp="2016-06-11T00:03:31+02:00">
+  <file name="/Users/siepmann/Projects/flow/codemonitoring/Packages/Application/Flowpack.Behat/Tests/Behat/FlowContext.php">
+    <violation beginline="19" endline="334" rule="TooManyPublicMethods" ruleset="Code Size Rules" package="Flowpack\Behat\Tests\Behat" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanypublicmethods" class="FlowContext" priority="3">
+      The class FlowContext has 11 public methods. Consider refactoring FlowContext to keep number of public methods under 10.
+    </violation>
+    <violation beginline="49" endline="49" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$parameters'.
+    </violation>
+    <violation beginline="138" endline="138" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$event'.
+    </violation>
+    <violation beginline="217" endline="217" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $fixtureFactoryClassNames. Keep variable name length under 20.
+    </violation>
+    <violation beginline="218" endline="218" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $fixtureFactoyClassName. Keep variable name length under 20.
+    </violation>
+  </file>
+  <file name="/Users/siepmann/Projects/flow/codemonitoring/Packages/Application/Flowpack.Behat/Tests/Functional/Fixture/FixtureFactory.php">
+    <violation beginline="46" endline="46" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $addObjectToPersistence. Keep variable name length under 20.
+    </violation>
+    <violation beginline="116" endline="116" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$object'.
+    </violation>
+    <violation beginline="116" endline="116" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$properties'.
+    </violation>
+    <violation beginline="116" endline="116" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$addObjectToPersistence'.
+    </violation>
+    <violation beginline="116" endline="116" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $addObjectToPersistence. Keep variable name length under 20.
+    </violation>
+  </file>
+</pmd>

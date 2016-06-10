@@ -1,11 +1,24 @@
-# Code monitoring
+CodeMonitoring |version| Documentation
+======================================
 
-## Target Group
+This documentation covering version |release| has been rendered at: |today|
+
+This is the documentation for the whole project.
+
+Introduction
+------------
+
+PHP Project to help developers maintain there code quality by using specialized tools for analyzing,
+but a single tool to vizualise and monitor the results.
+
+Target Group of this project
+----------------------------
 
 Developers at first, with easy to use CLI access. In the future also Companies
 to monitor the overall code quality across multiple projects.
 
-## Goal
+Goal
+----
 
 The target of this project is to provide a well designed web GUI for Code
 monitoring written in PHP. While this projects is based on PHP and will itself
@@ -19,3 +32,9 @@ future.
 All results will be parsed via CLI (perhaps also copy and paste via web form?)
 and persisted.
 Code Monitoring will analyze the data and display it with filter and graphs.
+
+.. toctree::
+
+   Development/Index
+   Processes/Index
+   Install

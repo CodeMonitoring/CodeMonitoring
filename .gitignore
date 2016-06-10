@@ -1,7 +1,13 @@
 /Build/
 /Configuration/
 /Data/
-/Packages/
+/Packages/*
+!/Packages/Application/
+/Packages/Application/*
+!/Packages/Application/CodeMonitoring.Framework
+!/Packages/Application/CodeMonitoring.Parser.Checkstyle
+!/Packages/Application/CodeMonitoring.Parser.Phpmd
+!/Packages/Application/CodeMonitoring.WebApp
 /Web/
 /bin/
 /Readme.rst

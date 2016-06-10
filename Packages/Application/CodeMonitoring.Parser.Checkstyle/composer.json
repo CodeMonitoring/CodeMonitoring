@@ -1,0 +1,18 @@
+{
+    "description": "Add description here",
+    "type": "neos-package",
+    "require": {
+        "typo3/flow": "*"
+    },
+    "name": "codemonitoring/parser-checkstyle",
+    "autoload": {
+        "psr-0": {
+            "CodeMonitoring\\Parser\\Checkstyle": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "CodeMonitoring.Parser.Checkstyle"
+        }
+    }
+}

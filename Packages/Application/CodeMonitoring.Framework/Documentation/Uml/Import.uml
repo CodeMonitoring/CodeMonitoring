@@ -1,0 +1,20 @@
+User -> ImportCommandController : files
+    activate ImportCommandController
+    loop for each file
+        ImportCommandController -> ResourceManager : importResource(file)
+        ImportCommandController -> Factory : getImporterForFile(Resource)
+        activate Factory
+            Factory -> Factory : getPossibleParsers
+            Factory -> Factory : getPossibleImporters
+            Factory -> Parser
+            activate Parser
+            Factory -> Importer
+            activate Importer
+            Factory -> Importer : setParser(Parser)
+            ImportCommandController <- Factory : importer
+        deactivate Factory
+        ImportCommandController -> Importer : importFile(Resource)
+        Importer -> Parser : parseFile(Resource)
+        == Rest is up to the Importer ==
+    end
+    deactivate ImportCommandController
