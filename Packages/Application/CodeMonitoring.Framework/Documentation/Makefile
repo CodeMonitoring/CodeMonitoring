@@ -23,6 +23,7 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
+	@echo "  plantuml   to make svgs out of plantuml files"
 	@echo "  html       to make standalone HTML files"
 	@echo "  livehtml   to make livereload HTML files at 127.0.0.1:8000"
 	@echo "  dirhtml    to make HTML files named index.html in directories"
@@ -52,7 +53,10 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
-html:
+plantuml:
+	plantuml -config plantuml.cfg -psvg -o ../Images/Uml/ ./Uml/*.uml
+
+html: plantuml
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
@@ -61,12 +65,12 @@ livehtml: html
 #	# Ignore Vim Temporary Files: *.sw[pmnox] and *~ and 4913
 	sphinx-autobuild -b html -i '*.sw[pmnox]' -i '*~' -i '*/4913' -i '4913' $(ALLSPHINXOPTS) $(BUILDDIR)/html
 
-dirhtml:
+dirhtml: plantuml
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/dirhtml."
 
-singlehtml:
+singlehtml: plantuml
 	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(BUILDDIR)/singlehtml
 	@echo
 	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
@@ -118,14 +122,14 @@ epub:
 	@echo
 	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
 
-latex:
+latex: plantuml
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
 	@echo
 	@echo "Build finished; the LaTeX files are in $(BUILDDIR)/latex."
 	@echo "Run \`make' in that directory to run these through (pdf)latex" \
 	      "(use \`make latexpdf' here to do that automatically)."
 
-latexpdf:
+latexpdf: plantuml
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
 	@echo "Running LaTeX files through pdflatex..."
 	$(MAKE) -C $(BUILDDIR)/latex all-pdf

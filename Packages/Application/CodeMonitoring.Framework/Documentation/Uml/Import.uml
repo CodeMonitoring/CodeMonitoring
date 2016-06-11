@@ -1,3 +1,5 @@
+@startuml
+
 User -> ImportCommandController : files
     activate ImportCommandController
     loop for each file
@@ -18,3 +20,5 @@ User -> ImportCommandController : files
         == Rest is up to the Importer ==
     end
     deactivate ImportCommandController
+
+@enduml

@@ -16,7 +16,7 @@ allows to reimport parsed information onces the config changes. So you can compa
 file or project with adjusted configuration and allows comparison.
 So you can test a new configuration before applying it.
 
-.. uml:: ../Uml/Import.uml
+.. image:: /Images/Uml/Import.svg
 
 At some point we will introduce a queue to process the files. To speed up the CLI Access and use a
 non blocking process.
