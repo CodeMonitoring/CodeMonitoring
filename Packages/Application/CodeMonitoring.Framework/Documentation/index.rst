@@ -17,6 +17,13 @@ Target Group of this project
 Developers at first, with easy to use CLI access. In the future also Companies
 to monitor the overall code quality across multiple projects.
 
+Current state
+-------------
+
+Nothing is achieved yet. It's a very early state, mostly about documenting ideas and concepts.
+
+Also some parts are kick started to be implemented. Take a look at :ref:`roadmap`.
+
 Goal
 ----
 
