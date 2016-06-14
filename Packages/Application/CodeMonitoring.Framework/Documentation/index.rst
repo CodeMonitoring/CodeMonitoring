@@ -9,7 +9,7 @@ Introduction
 ------------
 
 PHP Project to help developers maintain there code quality by using specialized tools for analyzing,
-but a single tool to vizualise and monitor the results.
+but a single tool to visualise and monitor the results.
 
 Target Group of this project
 ----------------------------
@@ -35,6 +35,7 @@ Code Monitoring will analyze the data and display it with filter and graphs.
 
 .. toctree::
 
-   Development/Index
-   Processes/Index
    Install
+   Features/Index
+   Processes/Index
+   Development/Index

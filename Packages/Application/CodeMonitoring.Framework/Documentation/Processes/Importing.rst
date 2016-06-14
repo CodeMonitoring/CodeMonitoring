@@ -18,6 +18,9 @@ So you can test a new configuration before applying it.
 
 .. image:: /Images/Uml/Import.svg
 
+It's up to the ``Importer`` how to handle the delivers information from parser and what
+configuration options are available.
+
 At some point we will introduce a queue to process the files. To speed up the CLI Access and use a
 non blocking process.
 
@@ -26,9 +29,14 @@ Possible Improvements
 
 To ease integration of new importers, we can provide the following:
 
-A trait providing the priority, with property and getter. The package can attach it to parser *and*
-importer and configure priority via :file:`Objects.yaml`. Also provide Eel for detecting whether
-file can be parsed or imported?
+A **trait** providing the priority, with property and getter. The package can attach it to parser *and*
+importer and configure priority via :file:`Objects.yaml`.
 
+Also provide **Eel** for detecting whether file can be parsed or imported?
 Provide some language like ``lineXContains("string")``, ``lineXStartsWith("string")``, or
 ``fileNameMatches("string")``, stuff like that.
+
+Use different **Backends** attachable to Importer? Things like "mail", "log", "db", ...
+
+Also provide some **Events**, either via AOP or Signal Slots. Enabling developers to register things
+like an email if a specified conditions occurs, e.g. more then x vulnerabilities against CGL.
