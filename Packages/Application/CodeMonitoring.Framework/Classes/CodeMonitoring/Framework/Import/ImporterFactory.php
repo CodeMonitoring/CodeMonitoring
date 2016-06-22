@@ -20,9 +20,10 @@ namespace CodeMonitoring\Framework\Import;
  * 02110-1301, USA.
  */
 
+use CodeMonitoring\Framework\Importer;
+use CodeMonitoring\Framework\Parse;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Resource\Resource;
-use CodeMonitoring\Framework\Parse;
 
 /**
  * Factory to return Importer.
@@ -31,7 +32,6 @@ use CodeMonitoring\Framework\Parse;
  */
 class ImporterFactory
 {
-
     /**
      * @Flow\Inject
      * @var \TYPO3\Flow\Reflection\ReflectionService
@@ -52,6 +52,59 @@ class ImporterFactory
      * @return ParserInterface
      */
     public function getImporterForFile(Resource $file)
+    {
+        $importer = $this->getImporter($file);
+        $importer->setParser($this->getParser($file));
+
+        return $importer;
+    }
+
+    protected function getImporter(Resource $file)
+    {
+        foreach ($this->getPossibleImporter() as $importer) {
+            if ($importer->canHandle($file)) {
+                return $importer;
+            }
+        }
+
+        throw new ImporterException(
+            'No importer found for file',
+            ImporterException::NO_IMPORTER_FOUND
+        );
+    }
+
+    /**
+     * Get all possible importer, sorted by priority.
+     *
+     * Instances of the importer will be returned.
+     *
+     * @return array
+     */
+    protected function getPossibleImporter()
+    {
+        $importer = [];
+        $importerClassNames = $this->reflectionService->getAllImplementationClassNamesForInterface(
+            ImporterInterface::class
+        );
+
+        foreach ($importerClassNames as $className) {
+            $importer[] = $this->objectManager->get($className);
+        }
+
+        usort(
+            $importer,
+            function (ImporterInterface $importerA, ImporterInterface $importerB) {
+                if ($importerA->getPriority() === $importerB->getPriority()) {
+                    return 0;
+                }
+                return ($importerA->getPriority() < $importerB->getPriority()) ? 1 : -1;
+            }
+        );
+
+        return $importer;
+    }
+
+    protected function getParser(Resource $file)
     {
         foreach ($this->getPossibleParsers() as $parser) {
             if ($parser->canParse($file)) {
@@ -86,8 +139,6 @@ class ImporterFactory
         usort(
             $parser,
             function (Parse\ParserInterface $parserA, Parse\ParserInterface $parserB) {
-                \TYPO3\Flow\var_dump($parserA->getPriority(), '$parserA->getPriority()');
-                \TYPO3\Flow\var_dump($parserB->getPriority(), '$parserB->getPriority()');
                 if ($parserA->getPriority() === $parserB->getPriority()) {
                     return 0;
                 }

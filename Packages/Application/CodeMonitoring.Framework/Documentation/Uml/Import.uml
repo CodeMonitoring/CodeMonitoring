@@ -7,8 +7,18 @@ User -> ImportCommandController : files
         ImportCommandController -> Factory : getImporterForFile(Resource)
 
         activate Factory
-            Factory -> Factory : getPossibleParsers
-            Factory -> Factory : getPossibleImporters
+            Factory -> Factory : getParser
+            activate Factory
+                Factory -> Factory : getPossibleParsers
+                activate Factory
+                deactivate Factory
+            deactivate Factory
+            Factory -> Factory : getImporter
+            activate Factory
+                Factory -> Factory : getPossibleImporters
+                activate Factory
+                deactivate Factory
+            deactivate Factory
 
             Factory -> Parser : new(Resource)
             activate Parser

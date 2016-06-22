@@ -56,10 +56,8 @@ class ImportCommandController extends CommandController
             // Implement as feature, configurable, another package, aop, ... ?
             $file = $this->resourceManager->importResource($filePath);
 
-            $parser = $this->importerFactory->getImporterForFile($filePath);
-            $parser->import
+            $importer = $this->importerFactory->getImporterForFile($file);
+            $importer->import();
         }
-        // Importer will use a parser to get content of file in needed format.
-        // Importer will import
     }
 }
