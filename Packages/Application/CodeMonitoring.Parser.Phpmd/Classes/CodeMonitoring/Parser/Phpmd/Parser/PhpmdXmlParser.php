@@ -25,8 +25,10 @@ use CodeMonitoring\Framework\Parse\ParserInterface;
 
 /**
  * Parser for PHP phpmd xml format.
+ *
+ * TODO: Not finished yet, finish Checkstyle parser first.
  */
-class PhpmdXmlParser implements ParserInterface
+abstract class PhpmdXmlParser implements ParserInterface
 {
     public function canParse(Resource $file)
     {

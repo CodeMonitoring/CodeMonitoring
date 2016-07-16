@@ -21,6 +21,7 @@ namespace CodeMonitoring\Framework\Import\Importer;
  */
 
 use CodeMonitoring\Framework\Import;
+use CodeMonitoring\Framework\Parse\EelParsingDetectionTrait;
 use TYPO3\Flow\Resource\Resource;
 
 /**
@@ -29,53 +30,12 @@ use TYPO3\Flow\Resource\Resource;
  */
 class DefaultImporter extends Import\AbstractImporter
 {
-    public function canHandle(Resource $file)
-    {
-        if (! $this->canHandleFileExtension($file)) {
-            return false;
-        }
-
-        if (! $this->canHandleFileByContent($file)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @TODO: Implement via EEL and configuration.
-     */
-    protected function canHandleFileExtension(Resource $file)
-    {
-        if ($file->getFileExtension() !== 'xml') {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @TODO: Implement via EEL and configuration.
-     */
-    protected function canHandleFileByContent(Resource $file)
-    {
-        $content = $file->getStream();
-        // Skip first line containing xml doc.
-        fgets($content);
-        // Get interesting lines.
-        $secondLine = fgets($content);
-        fclose($content);
-
-        // Check lines.
-        if (strpos($secondLine, 'checkstyle') !== false) {
-            return true;
-        }
-
-        return false;
-    }
+    use EelParsingDetectionTrait;
 
     public function import()
     {
-        \TYPO3\Flow\var_dump($this->parser, '$this->parser');die;
+        foreach ($this->parser->getData() as $data) {
+            \TYPO3\Flow\var_dump($data, '$data');die;
+        }
     }
 }

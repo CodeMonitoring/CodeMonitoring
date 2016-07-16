@@ -107,13 +107,14 @@ class ImporterFactory
     protected function getParser(Resource $file)
     {
         foreach ($this->getPossibleParsers() as $parser) {
-            if ($parser->canParse($file)) {
+            if ($parser->canHandle($file)) {
+                $parser->setFileToParse($file);
                 return $parser;
             }
         }
 
         throw new Parse\ParserException(
-            'No parser found that can handle "' . $filePath . '".',
+            'No parser found for file.',
             Parse\ParserException::NO_PARSER_FOUND
         );
     }

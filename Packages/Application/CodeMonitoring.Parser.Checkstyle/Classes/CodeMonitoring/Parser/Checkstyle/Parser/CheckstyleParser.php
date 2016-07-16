@@ -20,21 +20,79 @@ namespace CodeMonitoring\Parser\Checkstyle\Parser;
  * 02110-1301, USA.
  */
 
-use TYPO3\Flow\Resource\Resource;
+use CodeMonitoring\Framework\Parse\EelParsingDetectionTrait;
 use CodeMonitoring\Framework\Parse\ParserInterface;
+use CodeMonitoring\Parser\Checkstyle\Domain\Model\MessageDto;
+use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Resource\Resource;
 
 /**
  * Parser for checkstyle format.
  */
 class CheckstyleParser implements ParserInterface
 {
-    public function canParse(Resource $file)
-    {
-        return true;
-    }
+    use EelParsingDetectionTrait;
 
+    /**
+     * Defines XML name for files.
+     * @var string
+     */
+    protected $nodeNameForFiles = 'file';
+
+    /**
+     * @Flow\Inject
+     * @var \TYPO3\Flow\Property\PropertyMapper
+     */
+    protected $propertyMapper;
+
+    /**
+     * @var Resource
+     */
+    protected $fileToParse;
+
+    // TODO: Use trait and configure priority via yaml
     public function getPriority()
     {
         return 1;
+    }
+
+    // TODO: As all parser will use this, move to abstract parser?
+    public function setFileToParse(Resource $file)
+    {
+        $this->fileToParse = $file;
+    }
+
+    public function getData()
+    {
+        $file = [];
+        $reader = new \XMLReader;
+        $reader->open($this->fileToParse->createTemporaryLocalCopy());
+
+        while ($reader->read() && $reader->name !== $this->nodeNameForFiles) {
+            // Nothing todo, just move to the first file
+        }
+
+        // Parse each file.
+        while ($reader->name === $this->nodeNameForFiles) {
+            $xmlNodeFile = new \SimpleXMLElement($reader->readOuterXML());
+            $file = [
+                'fileName' => ((array) $xmlNodeFile->attributes())['@attributes']['name']
+            ];
+
+            // Parse each message for file.
+            foreach ($xmlNodeFile->children() as $xmlNodeMessage) {
+                yield $this->propertyMapper->convert(
+                    array_merge(
+                        $file,
+                        ((array) $xmlNodeMessage->attributes())['@attributes']
+                    ),
+                    MessageDto::class
+                );
+            }
+
+            $reader->next($this->nodeNameForFiles);
+        }
+
+        $reader->close();
     }
 }

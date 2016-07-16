@@ -43,6 +43,7 @@ Code Monitoring will analyze the data and display it with filter and graphs.
 .. toctree::
 
    Install
+   Usage/Index
    Features/Index
    Processes/Index
    Development/Index

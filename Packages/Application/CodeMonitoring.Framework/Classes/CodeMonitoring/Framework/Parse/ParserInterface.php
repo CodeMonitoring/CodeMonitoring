@@ -38,7 +38,7 @@ interface ParserInterface
      *
      * @return bool
      */
-    public function canParse(Resource $file);
+    public function canHandle(Resource $file);
 
     /**
      * Define priority of the parser.
@@ -49,4 +49,8 @@ interface ParserInterface
      * @return int
      */
     public function getPriority();
+
+    public function getData();
+
+    public function setFileToParse(Resource $file);
 }
