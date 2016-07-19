@@ -22,6 +22,13 @@ clean:
 generate:
 	phpcs --standard=PSR2 --report-checkstyle=Packages/Application/CodeMonitoring.Framework/Resources/Private/Example/checkstyle-psr2.xml  Packages/Application/CodeMonitoring.Framework/Classes
 
+.PHOHNY: classdiagram
+classdiagram:
+	plantumlwriter write Packages/Application/CodeMonitoring.* > classdiagram.tmp \
+	&& plantuml -config Packages/Application/CodeMonitoring.Framework/Documentation/plantuml.cfg classdiagram.tmp \
+	&& rm classdiagram.tmp \
+	&& open -a Google\ Chrome\ Canary classdiagram.svg
+
 .PHONY: test
 test:
 	./flow import:importfiles Packages/Application/CodeMonitoring.Framework/Resources/Private/Example/checkstyle-psr2.xml
