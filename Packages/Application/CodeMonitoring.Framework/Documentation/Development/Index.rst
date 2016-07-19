@@ -7,16 +7,24 @@ At this very early state everything is one repository, even if multiple packages
 As soon as first packages get a good state and work together, they will be splitted into there own
 repositories.
 
-.. _roadmap:
+This allows to handle them different and independent. Also they will get their own documentation.
 
-Roadmap
--------
+.. _extending:
 
-There is no timeline, just the order in which features will, at this moment, be implemented.
+Extending
+---------
 
-#. Implement first example parser and importer, to kick start framework to deal with these tasks and
-   provide an example implementation.
-   Also provide documentation. After this is implemented, there is already a single standard and
-   others can work with imported information.
+The following sections provide documentation how to extend the framework by providing your own
+parser, importer and such.
 
-#. Implement first output based on imported information. Provide first Views and GUI.
+In general you have to build a custom Flow package containing your code like parser. Generating this
+packages is not part of this documentation, but can be found at `Flow Docs`_.
+
+.. toctree::
+
+   Extending/Parser
+   Extending/Importer
+
+.. include:: Roadmap.rst
+
+.. _Flow Docs: https://flowframework.readthedocs.io/en/stable/

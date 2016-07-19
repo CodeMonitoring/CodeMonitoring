@@ -8,23 +8,43 @@ Implemented
 
 The following features are currently implemented.
 
+
+Parse file based information
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. todo:: Add ref to documentation here.
+
+Parsing is possible and documented at ... . It's possible to write custom parser. 
+
+Currently a parser for ``checkstyle`` is provided inside ``CodeMonitoring.Parser.Checkstyle``. The
+parser is registered and configured to parse :file:`.xml`-files with Checkstyle 2.5.x, like
+generated through `PHP CodeSniffer`_.
+
+Nothing is done with the parsed information yet, as no importer exists, see
+:ref:`features-future-import-files`.
+
+.. _features-future:
+
 Future
 ------
 
-The following features are currently planned for the future.
+The following features are currently planned for the future. With our current knowledge, that's
+everything needed at the moment to expand and built arbitrary useful software based on our
+framework.
 
-Parse and import file based information
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _features-future-import-files:
 
-Parse different file based outputs like phpunit, phpmd, phpcs. Make implementation open to make it
-easy to provide further packages with further implementations to make it possible to parse all
-available formats, at least by own implementations.
+Import file based information
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-At beginning, only import "file based information", which means information like the above tools
-generate. Each information is related to a specific file and mostly a line.
+Parse different file based outputs like phpunit, phpmd, phpcs.  At beginning, only import "file
+based information", which means information like the above tools generate. Each information is
+related to a specific file and mostly a line.
 
 Output like phploc is project based and provides overall information not related to specific files.
 This will be another feature.
+
+.. _features-future-import-project:
 
 Parse and import project based information
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -32,11 +52,15 @@ Parse and import project based information
 Parse output of tools like phploc, which is project based and provides information about the
 complete project, not specific files.
 
+.. _features-future-display:
+
 Display gathered information
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-First basic display via charts inside a web gui.
-
+First basic display via charts inside a web gui. This should be done in a new package that will grow
+and provide an API for further development. The API should ease the integration of "widgets" and
+such, so packages will be possible that will provide a parser, importer and widgets and provide full
+integration for things like Wordpress, TYPO3, Drupal, Apache Logs, Github Issues, Git, etc.
 
 Overall *features* to keep in mind during development
 -----------------------------------------------------
@@ -65,3 +89,4 @@ Information are already available.
   they wish. E.g. create reports via E-Mail. Provide new displayed information aggregated from
   existing ones.
 
+.. _PHP CodeSniffer: https://github.com/squizlabs/PHP_CodeSniffer

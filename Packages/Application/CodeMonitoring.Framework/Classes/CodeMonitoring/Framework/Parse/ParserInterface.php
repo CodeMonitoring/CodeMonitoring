@@ -33,6 +33,7 @@ interface ParserInterface
      * Defines whether parser can parse the given file.
      *
      * It's up to the parser to determine that.
+     * Return true if the file can be parse, false otherwise.
      *
      * @param Resource $file
      *
@@ -50,7 +51,26 @@ interface ParserInterface
      */
     public function getPriority();
 
-    public function getData();
-
+    /**
+     * This method will be called once the parser will be used.
+     * Due this method the file to parse will be provided.
+     *
+     * Most likely you will "persist" the file in a property for later usage in
+     * getData method.
+     *
+     * @param Resource $file
+     *
+     * @return void
+     */
     public function setFileToParse(Resource $file);
+
+    /**
+     * Will provide the parsed information to the world.
+     *
+     * This method should return whatever the parser has parsed. Most likely
+     * this method will be called by the importer.
+     *
+     * @return mixed
+     */
+    public function getData();
 }

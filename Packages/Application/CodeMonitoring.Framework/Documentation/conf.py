@@ -309,5 +309,6 @@ highlight_language='php'
 
 plantuml_output_format='svg'
 
-# Example configuration for intersphinx: refer to the Python standard library.
-# intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {
+    'flow': ('https://flowframework.readthedocs.io/en/latest/', None),
+}

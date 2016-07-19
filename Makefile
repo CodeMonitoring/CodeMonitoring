@@ -1,12 +1,12 @@
-# Makefile for Sphinx documentation
+# Makefile to ease development
 
 .PHONY: help
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo " Generation: "
-	@echo "     install"
-	@echo "     clean"
-	@echo "     test"
+	@echo "     install Setup the project (todo: not complete yet)"
+	@echo "     clean   Clear caches"
+	@echo "     test    Test import with some provided examples"
 
 .PHONY: install
 install:

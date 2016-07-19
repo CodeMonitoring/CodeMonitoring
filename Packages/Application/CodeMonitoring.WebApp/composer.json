@@ -1,5 +1,5 @@
 {
-    "description": "Add description here",
+    "description": "This package  provides a web frontend for Codemonitoring, including API for extension.",
     "type": "neos-package",
     "require": {
         "typo3/flow": "*"
