@@ -20,8 +20,8 @@ namespace CodeMonitoring\Parser\Checkstyle\Parser;
  * 02110-1301, USA.
  */
 
+use CodeMonitoring\Framework\Feature\CanHandleViaEelDetectionTrait;
 use CodeMonitoring\Framework\Feature\PriorityTrait;
-use CodeMonitoring\Framework\Parse\EelParsingDetectionTrait;
 use CodeMonitoring\Framework\Parse\ParserInterface;
 use CodeMonitoring\Parser\Checkstyle\Domain\Model\MessageDto;
 use TYPO3\Flow\Annotations as Flow;
@@ -32,7 +32,7 @@ use TYPO3\Flow\Resource\Resource;
  */
 class CheckstyleParser implements ParserInterface
 {
-    use EelParsingDetectionTrait;
+    use CanHandleViaEelDetectionTrait;
     use PriorityTrait;
 
     /**

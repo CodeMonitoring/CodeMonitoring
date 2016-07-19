@@ -20,8 +20,8 @@ namespace CodeMonitoring\Framework\Import\Importer;
  * 02110-1301, USA.
  */
 
+use CodeMonitoring\Framework\Feature\CanHandleViaEelDetectionTrait;
 use CodeMonitoring\Framework\Import;
-use CodeMonitoring\Framework\Parse\EelParsingDetectionTrait;
 use TYPO3\Flow\Resource\Resource;
 
 /**
@@ -30,7 +30,7 @@ use TYPO3\Flow\Resource\Resource;
  */
 class DefaultImporter extends Import\AbstractImporter
 {
-    use EelParsingDetectionTrait;
+    use CanHandleViaEelDetectionTrait;
 
     public function import()
     {

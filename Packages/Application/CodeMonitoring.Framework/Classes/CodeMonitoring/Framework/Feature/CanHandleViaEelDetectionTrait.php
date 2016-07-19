@@ -1,5 +1,5 @@
 <?php
-namespace CodeMonitoring\Framework\Parse;
+namespace CodeMonitoring\Framework\Feature;
 
 /*
  * Copyright (C) 2016  Daniel Siepmann <coding@daniel-siepmann.de>
@@ -34,7 +34,7 @@ use TYPO3\Eel\Helper as EelHelper;
  * TODO: Provide own utility for files like xml and co, to prevent reading all
  * content.
  */
-trait EelParsingDetectionTrait
+trait CanHandleViaEelDetectionTrait
 {
     /**
      * @var string
