@@ -20,6 +20,8 @@ namespace CodeMonitoring\Framework\Parse;
  * 02110-1301, USA.
  */
 
+use CodeMonitoring\Framework\Feature\CanHandleFileInterface;
+use CodeMonitoring\Framework\Feature\PriorityInterface;
 use TYPO3\Flow\Resource\Resource;
 
 /**
@@ -27,30 +29,8 @@ use TYPO3\Flow\Resource\Resource;
  *
  * By implementing the interface, they will be registered to the factory.
  */
-interface ParserInterface
+interface ParserInterface extends CanHandleFileInterface, PriorityInterface
 {
-    /**
-     * Defines whether parser can parse the given file.
-     *
-     * It's up to the parser to determine that.
-     * Return true if the file can be parse, false otherwise.
-     *
-     * @param Resource $file
-     *
-     * @return bool
-     */
-    public function canHandle(Resource $file);
-
-    /**
-     * Define priority of the parser.
-     *
-     * If multiple parser can handle the same file, the parser with higher
-     * priority will be used.
-     *
-     * @return int
-     */
-    public function getPriority();
-
     /**
      * This method will be called once the parser will be used.
      * Due this method the file to parse will be provided.

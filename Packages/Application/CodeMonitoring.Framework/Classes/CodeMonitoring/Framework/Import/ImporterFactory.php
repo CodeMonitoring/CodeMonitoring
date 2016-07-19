@@ -20,13 +20,15 @@ namespace CodeMonitoring\Framework\Import;
  * 02110-1301, USA.
  */
 
+use CodeMonitoring\Framework\Feature\PriorityInterface as Priority;
 use CodeMonitoring\Framework\Importer;
 use CodeMonitoring\Framework\Parse;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Resource\Resource;
 
 /**
- * Factory to return Importer.
+ * Factory to build and return Importer.
+ * The importer is ready to call import.
  *
  * @Flow\Scope("singleton")
  */
@@ -59,6 +61,13 @@ class ImporterFactory
         return $importer;
     }
 
+    /**
+     * Returns the importer to use for the given file.
+     *
+     * @param Resource $file File to get importer for.
+     *
+     * @return ImporterInterface
+     */
     protected function getImporter(Resource $file)
     {
         foreach ($this->getPossibleImporter() as $importer) {
@@ -91,21 +100,16 @@ class ImporterFactory
             $importer[] = $this->objectManager->get($className);
         }
 
-        usort(
-            $importer,
-            function (ImporterInterface $importerA, ImporterInterface $importerB) {
-                if ($importerA->getPriority() === $importerB->getPriority()) {
-                    return 0;
-                }
-                return ($importerA->getPriority() < $importerB->getPriority()) ? 1 : -1;
-            }
-        );
+        usort($importer, [$this, 'sort']);
 
         return $importer;
     }
 
     protected function getParser(Resource $file)
     {
+        // TODO: Refactor to call one method with file and interface name
+        //       Do same for importer.
+        //       Set parser afterwards for importer, and file afterwards for parser.
         foreach ($this->getPossibleParsers() as $parser) {
             if ($parser->canHandle($file)) {
                 $parser->setFileToParse($file);
@@ -137,16 +141,25 @@ class ImporterFactory
             $parser[] = $this->objectManager->get($className);
         }
 
-        usort(
-            $parser,
-            function (Parse\ParserInterface $parserA, Parse\ParserInterface $parserB) {
-                if ($parserA->getPriority() === $parserB->getPriority()) {
-                    return 0;
-                }
-                return ($parserA->getPriority() < $parserB->getPriority()) ? 1 : -1;
-            }
-        );
+        usort($parser, [$this, 'sort']);
 
         return $parser;
+    }
+
+    /**
+     * Will sort the given objects by their priority.
+     *
+     * @param Priority $priorityA
+     * @param Priority $priorityB
+     *
+     * @return int
+     */
+    protected function sort(Priority $priorityA, Priority $priorityB)
+    {
+        if ($priorityA->getPriority() === $priorityB->getPriority()) {
+            return 0;
+        }
+
+        return ($priorityA->getPriority() < $priorityB->getPriority()) ? 1 : -1;
     }
 }

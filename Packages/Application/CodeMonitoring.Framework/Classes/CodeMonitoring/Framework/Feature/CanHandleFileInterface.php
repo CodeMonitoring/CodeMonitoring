@@ -1,5 +1,5 @@
 <?php
-namespace CodeMonitoring\Framework\Import;
+namespace CodeMonitoring\Framework\Feature;
 
 /*
  * Copyright (C) 2016  Daniel Siepmann <coding@daniel-siepmann.de>
@@ -20,30 +20,22 @@ namespace CodeMonitoring\Framework\Import;
  * 02110-1301, USA.
  */
 
-use CodeMonitoring\Framework\Feature\CanHandleFileInterface;
-use CodeMonitoring\Framework\Feature\PriorityInterface;
-use CodeMonitoring\Framework\Parse\ParserInterface;
+use TYPO3\Flow\Resource\Resource;
 
 /**
- * All importer have to implement this interface.
- *
- * By implementing the interface, they will be registered to the factory.
+ * Defines how an object will tell the world whether it can work with a given
+ * file.
  */
-interface ImporterInterface extends CanHandleFileInterface, PriorityInterface
+interface CanHandleFileInterface
 {
     /**
-     * Defines whether importer can handle the given file.
+     * Defines whether this class can work with the given file.
      *
-     * @param ParserInterface $parser
+     * Return true if the object can work with file, false otherwise.
      *
-     * @return void
+     * @param Resource $file
+     *
+     * @return bool
      */
-    public function setParser(ParserInterface $parser);
-
-    /**
-     * Implement import logic.
-     *
-     * @return void
-     */
-    public function import();
+    public function canHandle(Resource $file);
 }

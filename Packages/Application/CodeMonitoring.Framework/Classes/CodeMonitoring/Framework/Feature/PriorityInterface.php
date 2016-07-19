@@ -1,5 +1,5 @@
 <?php
-namespace CodeMonitoring\Framework\Import;
+namespace CodeMonitoring\Framework\Feature;
 
 /*
  * Copyright (C) 2016  Daniel Siepmann <coding@daniel-siepmann.de>
@@ -20,30 +20,21 @@ namespace CodeMonitoring\Framework\Import;
  * 02110-1301, USA.
  */
 
-use CodeMonitoring\Framework\Feature\CanHandleFileInterface;
-use CodeMonitoring\Framework\Feature\PriorityInterface;
-use CodeMonitoring\Framework\Parse\ParserInterface;
-
 /**
- * All importer have to implement this interface.
+ * Defines how an object will tell the world his priority.
  *
- * By implementing the interface, they will be registered to the factory.
+ * Often used to determine the order in which objects should be tried.
+ * E.g. which parser should be used first, before trying next one.
  */
-interface ImporterInterface extends CanHandleFileInterface, PriorityInterface
+interface PriorityInterface
 {
     /**
-     * Defines whether importer can handle the given file.
+     * Define priority of the parser.
      *
-     * @param ParserInterface $parser
+     * If multiple parser can handle the same file, the parser with higher
+     * priority will be used.
      *
-     * @return void
+     * @return int
      */
-    public function setParser(ParserInterface $parser);
-
-    /**
-     * Implement import logic.
-     *
-     * @return void
-     */
-    public function import();
+    public function getPriority();
 }

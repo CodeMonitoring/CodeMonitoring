@@ -14,3 +14,8 @@ E.g. run it with provided examples::
     ./flow import:importfiles Packages/Application/CodeMonitoring.Framework/Resources/Private/Example/checkstyle-psr2.xml Packages/Application/CodeMonitoring.Framework/Resources/Private/Example/phpmd.xml
 
 To ease development we provide a :file:`Makefile`.
+
+
+.. todo:: Document priority for importer and parser
+
+.. todo:: Document that first importer and parser will be used.
