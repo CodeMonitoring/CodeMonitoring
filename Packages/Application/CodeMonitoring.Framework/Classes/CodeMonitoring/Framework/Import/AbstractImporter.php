@@ -24,7 +24,6 @@ use CodeMonitoring\Framework\Parse\ParserInterface;
 
 /**
  * Abstract class to provide most of the interface.
- * All parts are configurable via yaml.
  */
 abstract class AbstractImporter implements ImporterInterface
 {
