@@ -51,9 +51,6 @@ class ImportCommandController extends CommandController
     public function importFilesCommand(array $files)
     {
         foreach ($files as $filePath) {
-            // TODO: Persist file for logging?  Everyone can take a look what
-            // was imported, and when.  Also GUI can display raw reports.
-            // Implement as feature, configurable, another package, aop, ... ?
             $file = $this->resourceManager->importResource($filePath);
 
             $importer = $this->importerFactory->getImporterForFile($file);
