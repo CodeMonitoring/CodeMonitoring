@@ -149,6 +149,9 @@ class ImporterFactory
     /**
      * Will sort the given objects by their priority.
      *
+     * TODO: Refactor into own class as static method for better reuse with
+     * interface.
+     *
      * @param Priority $priorityA
      * @param Priority $priorityB
      *

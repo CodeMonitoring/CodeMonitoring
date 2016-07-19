@@ -1,5 +1,5 @@
 <?php
-namespace CodeMonitoring\Framework\Import;
+namespace CodeMonitoring\Framework\Feature;
 
 /*
  * Copyright (C) 2016  Daniel Siepmann <coding@daniel-siepmann.de>
@@ -20,23 +20,29 @@ namespace CodeMonitoring\Framework\Import;
  * 02110-1301, USA.
  */
 
-use CodeMonitoring\Framework\Feature\PriorityTrait;
-use CodeMonitoring\Framework\Parse\ParserInterface;
-
 /**
- * Abstract class to provide most of the interface.
+ * Trait to implement PriorityInterface.
+ *
+ * This enables developers to attach it, and just configure via Objects.yaml.
+ *
+ * No need for additional code and custom implementation if not needed.
  */
-abstract class AbstractImporter implements ImporterInterface
+trait PriorityTrait
 {
-    use PriorityTrait;
+    /**
+     * Should be set via Objects.yaml
+     *
+     * @var int
+     */
+    protected $priority = 1;
 
     /**
-     * @var ParserInterface
+     * Returns 1 as default, or configured integer.
+     *
+     * @return int
      */
-    protected $parser;
-
-    public function setParser(ParserInterface $parser)
+    public function getPriority()
     {
-        $this->parser = $parser;
+        return (int) $this->priority;
     }
 }

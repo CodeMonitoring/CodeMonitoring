@@ -20,6 +20,7 @@ namespace CodeMonitoring\Parser\Checkstyle\Parser;
  * 02110-1301, USA.
  */
 
+use CodeMonitoring\Framework\Feature\PriorityTrait;
 use CodeMonitoring\Framework\Parse\EelParsingDetectionTrait;
 use CodeMonitoring\Framework\Parse\ParserInterface;
 use CodeMonitoring\Parser\Checkstyle\Domain\Model\MessageDto;
@@ -32,6 +33,7 @@ use TYPO3\Flow\Resource\Resource;
 class CheckstyleParser implements ParserInterface
 {
     use EelParsingDetectionTrait;
+    use PriorityTrait;
 
     /**
      * Defines XML name for files.
@@ -49,12 +51,6 @@ class CheckstyleParser implements ParserInterface
      * @var Resource
      */
     protected $fileToParse;
-
-    // TODO: Use trait and configure priority via yaml
-    public function getPriority()
-    {
-        return 1;
-    }
 
     // TODO: As all parser will use this, move to abstract parser?
     public function setFileToParse(Resource $file)
